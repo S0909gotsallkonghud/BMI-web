@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width-initial-scale=1.0"/>
+    <title>คำนวณBMI</title>
+    <style>
+         body {
+      font-family: 'Prompt', sans-serif;
+      background: #f0f8ff;
+      text-align: center;
+      padding: 40px;
+    }
+    h1 {
+      color: #0077cc;
+    }
+    input {
+      padding: 10px;
+      margin: 10px;
+      width: 200px;
+      font-size: 16px;
+      border: 2px solid #5987a8;
+      border-radius: 25px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #28a745;
+      color: white;
+      border: 2px solid #4ea674;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #218838;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      border: 2px solid #4b648d;
+      border-radius: 20px;
+    }
+    h3 {
+        font-size: 30px;
+        color: #6579be;
+        border: 2px solid #4b648d;
+        border-radius: 20px;
+        border-width: auto;
+    }
+    </style>
+</head>
+<body>
+    <h1>4D HEALTH</h1>
+    <h2>คำนวณBMI</h2>
+    <input type="น้ำหนัก" id="weight" placeholder="น้ำหนัก (กิโลกรัม)" />
+    <br/>
+    <input type="ส่วนสูง" id="height" placeholder="ส่วนสูง (เซนติเมตร)" />
+    <br/>
+    <button onclick="calculateBMI()">คำนวณBMI</button>
+    <div class="result" id="output"></div>
+    <h3>"BMI" <br/> Body Mass Index <br/> ดัชนีมวลกาย</h3>
+
+ <script>
+    function calculateBMI() {
+      const weight = parseFloat(document.getElementById("weight").value);
+      const heightCM = parseFloat(document.getElementById("height").value);
+      const heightM = heightCM / 100;
+
+      if (!weight || !heightCM || heightM === 0) {
+        document.getElementById("output").innerText = "กรุณากรอกน้ำหนักและส่วนสูงให้ถูกต้อง";
+        return;
+      }
+
+      const bmi = weight / (heightM ** 2);
+      let status = "";
+
+      if (bmi < 18.5) status = "น้ำหนักน้อย (ผอม)";
+      else if (bmi < 23) status = "น้ำหนักปกติ";
+      else if (bmi < 25) status = "น้ำหนักเกิน";
+      else if (bmi < 30) status = "อ้วนระดับ 1";
+      else status = "อ้วนระดับ 2 (อ้วนมาก)";
+
+      document.getElementById("output").innerText =
+        `ค่า BMI ของคุณคือ ${bmi.toFixed(2)}\nสถานะ: ${status}`;
+    }
+  </script>
+</body>
+</html>
